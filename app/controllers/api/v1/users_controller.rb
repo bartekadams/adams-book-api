@@ -20,8 +20,8 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def login
-        user = User.find_by(username: params[:username])
-        if user && user.authenticate(params[:password])
+        user = User.find_by(username: user_params[:username])
+        if user && user.authenticate(user_params[:password])
 
             payload = { user_id: user.id }
 
@@ -40,6 +40,6 @@ class Api::V1::UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:username, :password, :password_confirmation)
+        params.require(:user).permit(:username, :password, :password_confirmation)
     end
 end
