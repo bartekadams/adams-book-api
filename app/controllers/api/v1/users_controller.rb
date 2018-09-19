@@ -1,10 +1,14 @@
 class Api::V1::UsersController < ApplicationController
+    skip_before_action :authenticate_request!, only: [:register, :login]
+
     def register
         user = User.new(user_params)
         if user.save
+            payload = { user_id: user.id }
             render json: {
                 status: "SUCCESS",
-                message: "User created"
+                message: "User created",
+                token: JsonWebToken.encode(payload)
             }, status: :created
         else
             render json: {
@@ -17,17 +21,20 @@ class Api::V1::UsersController < ApplicationController
 
     def login
         user = User.find_by(username: params[:username])
-        if user
+        if user && user.authenticate(params[:password])
+
+            payload = { user_id: user.id }
+
             render json: {
                 status: "SUCCESS",
                 message: "User logged in",
-                token: "TEMP"
+                token: JsonWebToken.encode(payload)
             }, status: :ok
         else
             render json: {
                 status: "ERROR",
-                message: "User not found"
-            }, status: :not_found
+                message: "Invalid credentials"
+            }, status: :unauthorized
         end
     end
 
