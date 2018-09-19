@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-    before_action :authenticate_request!
+    #before_action :authenticate_request!
 
     rescue_from ActiveRecord::RecordNotFound, with: :not_found_handler
     rescue_from JWT::DecodeError, JWT::VerificationError, JWT::ExpiredSignature, with: :token_error
