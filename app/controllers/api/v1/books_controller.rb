@@ -1,8 +1,10 @@
 class Api::V1::BooksController < ApplicationController
     def index
         render json: {
-            data: Book.limit(10)
-        }
+            status: "SUCCESS",
+            message: "Books found",
+            data: Book.all
+        }, status: :ok
     end
 
     def show
