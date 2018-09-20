@@ -3,7 +3,10 @@ class Api::V1::LoansController < ApplicationController
     render json: {
       status: "SUCCESS",
       message: "Loans found",
-      data: current_user.loans
+      data: {
+        loans_as_borrower: current_user.loans_as_borrower,
+        loans_as_owner: current_user.loans_as_owner
+      }
     }, status: :ok
   end
 
