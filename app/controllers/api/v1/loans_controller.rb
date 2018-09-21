@@ -63,6 +63,6 @@ class Api::V1::LoansController < ApplicationController
 
   private
   def loan_params
-    params.require(:loan).permit(:book_id)
+    params.fetch(:loan, {}).permit(:book_id)
   end
 end
