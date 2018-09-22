@@ -4,7 +4,11 @@ Rails.application.routes.draw do
       post 'register', to: 'users#register'
       post 'login', to: 'users#login'
 
-      resources :books
+      resources :books do
+        collection do
+          get 'my_books'
+        end
+      end
       resources :loans, only: [:index, :create, :destroy]
     end
   end

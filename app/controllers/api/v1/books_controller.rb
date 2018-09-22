@@ -79,6 +79,14 @@ class Api::V1::BooksController < ApplicationController
         end
     end
 
+    def my_books
+        render json: {
+            status: "SUCCESS",
+            message: "Books found",
+            data: current_user.books
+        }, status: :ok
+    end
+
     private
     def book_params
         params.fetch(:book, {}).permit(:name)

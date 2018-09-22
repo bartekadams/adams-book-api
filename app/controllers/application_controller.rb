@@ -20,8 +20,7 @@ class ApplicationController < ActionController::API
     def not_found_handler(e)
         render json: {
             status: "ERROR",
-            message: "Record with this id not found",
-            data: e
+            message: e
         }, status: :not_found
     end
 
