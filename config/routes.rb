@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :books do
         collection do
           get 'my_books'
+          get 'newest_books'
         end
       end
       resources :loans, only: [:index, :create, :destroy]

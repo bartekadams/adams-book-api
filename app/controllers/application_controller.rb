@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
 
     private
     def token_error(e)
-        render json: { status: "ERROR", message: e.to_s }
+        render json: { status: "ERROR", message: e.to_s }, status: :unauthorized
     end
 
     def not_found_handler(e)

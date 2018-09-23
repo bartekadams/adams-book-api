@@ -87,6 +87,15 @@ class Api::V1::BooksController < ApplicationController
         }, status: :ok
     end
 
+    def newest_books
+        render json: {
+            status: "SUCCESS",
+            message: "Books found",
+            data: Book.limit(9).order("created_at DESC")
+        }, status: :ok
+    end
+
+
     private
     def book_params
         params.fetch(:book, {}).permit(:name)
