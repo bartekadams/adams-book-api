@@ -8,7 +8,9 @@ class Api::V1::UsersController < ApplicationController
             render json: {
                 status: "SUCCESS",
                 message: "User created",
-                token: JsonWebToken.encode(payload)
+                data: {
+                    token: JsonWebToken.encode(payload)
+                }
             }, status: :created
         else
             render json: {
@@ -21,19 +23,32 @@ class Api::V1::UsersController < ApplicationController
 
     def login
         user = User.find_by(username: user_params[:username])
-        if user && user.authenticate(user_params[:password])
-
-            payload = { user_id: user.id }
-
-            render json: {
-                status: "SUCCESS",
-                message: "User logged in",
-                token: JsonWebToken.encode(payload)
-            }, status: :ok
+        if user
+            if user.authenticate(user_params[:password])
+                payload = { user_id: user.id }
+                render json: {
+                    status: "SUCCESS",
+                    message: "User logged in",
+                    data: {
+                        token: JsonWebToken.encode(payload)
+                    }
+                }, status: :ok
+            else
+                render json: {
+                    status: "ERROR",
+                    message: "User not logged in",
+                    data: {
+                        password: ["Niepoprawne hasło"]
+                    }
+                }, status: :unauthorized
+            end
         else
             render json: {
                 status: "ERROR",
-                message: "Invalid credentials"
+                message: "User not logged in",
+                data: {
+                    username: ["Niepoprawna nazwa uzytkownika"]
+                }
             }, status: :unauthorized
         end
     end
