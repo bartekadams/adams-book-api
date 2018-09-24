@@ -82,7 +82,7 @@ class Api::V1::BooksController < ApplicationController
     def my_books
         render json: {
             status: "SUCCESS",
-            message: "Books found",
+            message: "User's books found",
             data: current_user.books
         }, status: :ok
     end
@@ -90,8 +90,8 @@ class Api::V1::BooksController < ApplicationController
     def newest_books
         render json: {
             status: "SUCCESS",
-            message: "Books found",
-            data: Book.limit(9).order("created_at DESC")
+            message: "Newest books found",
+            data: Book.all.order("id DESC").page(params[:page]).per(9)
         }, status: :ok
     end
 
