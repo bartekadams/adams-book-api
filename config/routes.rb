@@ -9,6 +9,10 @@ Rails.application.routes.draw do
           get 'my_books'
           get 'newest_books'
         end
+
+        member do
+          patch 'update_book_cover'
+        end
       end
       resources :loans, only: [:index, :create, :destroy]
     end

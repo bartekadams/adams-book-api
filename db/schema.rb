@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180919204857) do
+ActiveRecord::Schema.define(version: 20180924131532) do
 
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.integer "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "book_cover"
     t.index ["owner_id"], name: "index_books_on_owner_id"
   end
 

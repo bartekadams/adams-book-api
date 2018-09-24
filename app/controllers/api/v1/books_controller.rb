@@ -79,6 +79,35 @@ class Api::V1::BooksController < ApplicationController
         end
     end
 
+    def update_book_cover
+        # only your book
+        book = Book.find(params[:id])
+        if params[:book_cover].nil?
+            render json: {
+                status: "ERROR",
+                message: "Book cover not updated",
+                data: {
+                    book_cover: ["Brak załączonego pliku"]
+                }
+            }, status: :unprocessable_entity
+        else
+            book.book_cover = params[:book_cover]
+            if book.save
+                render json: {
+                    status: "SUCCESS",
+                    message: "Book cover updated",
+                    data: book
+                }, status: :ok
+            else
+                render json: {
+                    status: "ERROR",
+                    message: "Book cover not updated",
+                    data: book.errors
+                }, status: :unprocessable_entity
+            end
+        end
+    end
+
     def my_books
         render json: {
             status: "SUCCESS",

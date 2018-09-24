@@ -27,6 +27,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 
 gem 'kaminari'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

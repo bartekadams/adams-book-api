@@ -20,8 +20,12 @@ puts 'seeding books'
 puts '.' * 10
 User.all.each do |user|
     (1..5).each do |n|
+        # added slash at the end because url redirects and couses book creation to fail
+        # you can do user.errors.inspect to see that if there is no slash
+        url = Faker::LoremPixel.image("700x1000", false, 'abstract') + '/'
         user.books.create(
-            name: Faker::Book.title
+            name: Faker::Book.title,
+            remote_book_cover_url: url
         )
     end
     print "."
