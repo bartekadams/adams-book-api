@@ -25,7 +25,12 @@ User.all.each do |user|
         url = Faker::LoremPixel.image("700x1000", false, 'abstract') + '/'
         user.books.create(
             name: Faker::Book.title,
-            remote_book_cover_url: url
+            remote_book_cover_url: url,
+            author: Faker::Book.author,
+            genre: Faker::Book.genre,
+            description: Faker::Hipster.paragraph(15),
+            publisher: Faker::Book.publisher,
+            publication_date: rand.rand(1900..2018)
         )
     end
     print "."

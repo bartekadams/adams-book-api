@@ -3,7 +3,7 @@ class Book < ApplicationRecord
     has_many :loans
 
     mount_uploader :book_cover, BookCoverUploader
-    serialize :avatars, JSON # If you use SQLite, add this line.
+    serialize :book_cover, JSON # If you use SQLite, add this line.
 
-    validates :name, presence: true
+    validates :name, :author, presence: true
 end

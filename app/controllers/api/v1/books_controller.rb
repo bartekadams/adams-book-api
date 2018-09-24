@@ -13,7 +13,12 @@ class Api::V1::BooksController < ApplicationController
             render json: {
                 status: "SUCCESS",
                 message: "Book found",
-                data: book
+                data: {
+                    book: book,
+                    owner: book.owner.username,
+                    createdAtText: book.created_at.to_s(:db),
+                    ownerRequest: book.owner.id == current_user.id
+                }
             }, status: :ok
         else
             book_not_found
@@ -112,7 +117,7 @@ class Api::V1::BooksController < ApplicationController
         render json: {
             status: "SUCCESS",
             message: "User's books found",
-            data: current_user.books
+            data: current_user.books.order('name ASC').select(:id, :name, :book_cover)
         }, status: :ok
     end
 
