@@ -35,5 +35,7 @@ module AdamsBookApi
 
     #autoloads lib folder during development
     config.autoload_paths << Rails.root.join('lib')
+
+    config.i18n.default_locale = :'pl'
   end
 end

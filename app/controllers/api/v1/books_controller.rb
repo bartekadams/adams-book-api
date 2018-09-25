@@ -132,7 +132,7 @@ class Api::V1::BooksController < ApplicationController
 
     private
     def book_params
-        params.fetch(:book, {}).permit(:name)
+        params.fetch(:book, {}).permit(:name, :author, :genre, :publication_date, :publisher, :description)
     end
 
     def book_not_found
