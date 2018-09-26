@@ -125,7 +125,7 @@ class Api::V1::BooksController < ApplicationController
         render json: {
             status: "SUCCESS",
             message: "Newest books found",
-            data: Book.all.order("id DESC").page(params[:page]).per(9)
+            data: Book.all.order("id DESC").page(params[:page]).per(params[:limit])
         }, status: :ok
     end
 
