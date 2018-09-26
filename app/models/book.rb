@@ -6,4 +6,5 @@ class Book < ApplicationRecord
     serialize :book_cover, JSON # If you use SQLite, add this line.
 
     validates :name, :author, presence: true
+    validates :publication_date, inclusion: { in: 1900..Date.today.year }, allow_nil: true
 end

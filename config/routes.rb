@@ -14,7 +14,12 @@ Rails.application.routes.draw do
           patch 'update_book_cover'
         end
       end
-      resources :loans, only: [:index, :create, :destroy]
+      resources :loans, only: [:create, :update, :destroy] do
+        collection do
+          get 'other_requests'
+          get 'my_requests'
+        end
+      end
     end
   end
 end

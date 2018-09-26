@@ -17,7 +17,8 @@ class Api::V1::BooksController < ApplicationController
                     book: book,
                     owner: book.owner.username,
                     createdAtText: book.created_at.to_s(:db),
-                    ownerRequest: book.owner.id == current_user.id
+                    ownerRequest: book.owner.id == current_user.id,
+                    isActiveLoan: Loan.where(borrower_id: current_user.id, book_id: book.id, status: [:pending, :accepted]).exists?
                 }
             }, status: :ok
         else
