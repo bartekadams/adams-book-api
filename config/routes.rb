@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         collection do
           get 'my_books'
           get 'newest_books'
+          get 'search_books'
         end
 
         member do

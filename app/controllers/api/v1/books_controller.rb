@@ -130,6 +130,13 @@ class Api::V1::BooksController < ApplicationController
         }, status: :ok
     end
 
+    def search_books
+        render json: {
+            status: "SUCCESS",
+            message: "Books found",
+            data: Book.order('name ASC').select(:id, :name, :book_cover).where("lower(name) LIKE :query", query: "%#{params[:search].downcase}%")
+        }, status: :ok
+    end
 
     private
     def book_params
