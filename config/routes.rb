@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'register', to: 'users#register'
       post 'login', to: 'users#login'
+      patch 'change_password', to: 'users#change_password'
 
       resources :books do
         collection do
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
           patch 'update_book_cover'
         end
       end
+
       resources :loans, only: [:create, :update, :destroy] do
         collection do
           get 'other_requests'

@@ -53,6 +53,41 @@ class Api::V1::UsersController < ApplicationController
         end
     end
 
+    def change_password
+        if params[:password] == params[:password_confirmation]
+            if current_user.authenticate(params[:old_password])
+                if current_user.update({ password: params[:password] })
+                    render json: {
+                        status: "SUCCESS",
+                        message: "Password updated"
+                    }, status: :ok
+                else
+                    render json: {
+                        status: "ERROR",
+                        message: "Password not updated",
+                        data: current_user.errors
+                    }, status: :unprocessable_entity
+                end
+            else
+                render json: {
+                    status: "ERROR",
+                    message: "Password not updated",
+                    data: {
+                        old_password: ["Niepoprawne hasło"]
+                    }
+                }, status: :unauthorized
+            end
+        else
+            render json: {
+                status: "ERROR",
+                message: "Password not updated",
+                data: {
+                    password_confirmation: ["Hasła nie są jednakowe."]
+                }
+            }, status: :unprocessable_entity
+        end
+    end
+
     private
     def user_params
         params.fetch(:user, {}).permit(:username, :password, :password_confirmation)
