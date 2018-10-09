@@ -5,6 +5,9 @@ API project in Ruby on Rails for book sharing. Frontend for this app is adams-bo
 * System dependencies
 
   May require ImageMagick installed in system to properly resize uploaded images (in Ubuntu 16.04 it does).
+
+  Uses [carrierwave-imageoptimizer](https://github.com/jtescher/carrierwave-imageoptimizer#this-gem-uses-the-following-utilities-for-optimizing-images) and because of that requires to install optipng and jpegoptim.
+
   
 * Deployment instructions
 

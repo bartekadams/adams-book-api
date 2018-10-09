@@ -46,6 +46,9 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    carrierwave-imageoptimizer (1.4.0)
+      carrierwave (>= 0.8, < 2.0)
+      image_optimizer (~> 1.6)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     erubi (1.7.1)
@@ -56,6 +59,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
+    image_optimizer (1.8.0)
     jwt (2.1.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -150,6 +154,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   carrierwave (~> 1.0)
+  carrierwave-imageoptimizer
   faker (~> 1.9, >= 1.9.1)
   jwt
   kaminari

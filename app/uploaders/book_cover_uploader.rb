@@ -1,5 +1,6 @@
 class BookCoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+  include CarrierWave::ImageOptimizer
 
   storage :file
 
@@ -26,6 +27,7 @@ class BookCoverUploader < CarrierWave::Uploader::Base
   # end
 
   process resize_to_fit: [800, 800]
+  process optimize: [{ quiet: false, quality: 25 }]
 
   # Create different versions of your uploaded files:
   version :small do
@@ -39,7 +41,7 @@ class BookCoverUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg png) # gif cannot be oprimized, but can be resized
   end
 
   # Override the filename of the uploaded files:
